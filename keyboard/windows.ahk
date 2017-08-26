@@ -1,28 +1,16 @@
-Capslock::    ; Capslock
-+Capslock::   ; Shift+Capslock
-!Capslock::   ; Alt+Capslock
-^Capslock::   ; Ctrl+Capslock
-#Capslock::   ; Win+Capslock
-^!Capslock::  ; Ctrl+Alt+CapsLock
-^!#Capslock:: ; Ctrl+Alt+Win+Capslock
-;............ ; You can add whatever you want to block
-return        ; Do nothing, return
+CapsLock::
+  KeyWait, CapsLock
+  If (A_PriorKey="CapsLock")
+    SetCapsLockState, % GetKeyState("CapsLock","T") ? "Off" : "On"
+Return
+#If, GetKeyState("CapsLock", "P") ;Your CapsLock hotkeys go below
 
-
-
-Capslock & o::
-Capslock & h::
-  Send, {Left}
-  return
-Capslock & e::
-Capslock & t::
-  Send, {Down}
-  return
-Capslock & u::
-Capslock & n::
-  Send, {Right}
-  return
-Capslock & .::
-Capslock & c::
-  Send, {Up}
-  return
+.::Up
+c::Up
+o::Left
+h::Left
+e::Down
+t::Down
+u::Right
+n::Right
+Space::Send {Return}
